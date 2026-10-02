@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>imd-schemas — Experimental input validator</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.6; }
+    body { max-width: 58rem; margin: 0 auto; padding: 1.5rem; }
+    .banner { border: 2px solid #a76b12; border-radius: .4rem; padding: 1rem; font-weight: 600; }
+    h1 { margin-bottom: .25rem; font-size: 2.5rem; }
+    pre { overflow-x: auto; padding: 1rem; border: 1px solid #888; border-radius: .4rem; }
+    code { font-family: ui-monospace, monospace; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .65rem; border-bottom: 1px solid #888; text-align: left; }
+    a { text-underline-offset: .2em; }
+    footer { margin-top: 2rem; border-top: 1px solid #888; padding-top: 1rem; }
+  </style>
+</head>
+<body>
+  <aside class="banner" aria-label="Experimental status">Experimental, commissioned as a test of the IMD swarm. It may not work as described. Read the code, start with small amounts, no warranty.</aside>
+  <main>
+    <h1>imd-schemas</h1>
+    <p>Check IMD paid action inputs locally with draft 2020-12 JSON Schemas, a TypeScript library and a Node 20+ command-line validator.</p>
+    <p>All build dependencies are included as ordinary files. From the checkout:</p>
+    <pre><code>npm test
+node bin/imd-validate.cjs schedule.create examples/schedule-oracle.json --version schedule-1
+node bin/imd-validate.cjs --refusals</code></pre>
+    <p>Validate the action's input body. Pass the server's exact action version to detect unsupported updates. An action alone uses the frozen local snapshot.</p>
+    <table>
+      <caption>Supported action versions, read on 2026-10-02</caption>
+      <thead><tr><th scope="col">Action</th><th scope="col">JSON Schema</th></tr></thead>
+      <tbody>
+        <tr><td><code>job.open</code>, <code>job.continue</code></td><td><a href="../schemas/job-1.json">job-1</a></td></tr>
+        <tr><td><code>launch.open</code></td><td><a href="../schemas/launch-1.json">launch-1</a></td></tr>
+        <tr><td><code>workflow.open</code></td><td><a href="../schemas/workflow-1.json">workflow-1</a></td></tr>
+        <tr><td><code>oracle.request</code></td><td><a href="../schemas/oracle-1.json">oracle-1</a></td></tr>
+        <tr><td><code>schedule.create</code></td><td><a href="../schemas/schedule-1.json">schedule-1</a></td></tr>
+        <tr><td><code>schedule.topup</code></td><td><a href="../schemas/topup-1.json">topup-1</a></td></tr>
+      </tbody>
+    </table>
+    <p>The validator reports field errors and selected planning warnings. Successful local validation does not guarantee server admission, wallet ownership, resource availability or successful evaluation. No wallet connects and no payment is sent by this project.</p>
+    <nav aria-label="Project resources">
+      <ul>
+        <li><a href="../README.md">README: setup, library API and limits</a></li>
+        <li><a href="../examples/manifest.json">25 checked input examples and their sources</a></li>
+        <li><a href="../docs/refusals.md">Known refusal codes and causes</a></li>
+        <li><a href="https://imd.fun/docs">IMD API documentation</a></li>
+      </ul>
+    </nav>
+  </main>
+  <footer>Commissioned through paid IMD swarm requests.</footer>
+</body>
+</html>

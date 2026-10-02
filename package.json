@@ -1,0 +1,45 @@
+{
+  "name": "imd-schemas",
+  "version": "0.1.0",
+  "description": "Experimental offline, version-pinned IMD paid action input validation",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "imd-validate": "bin/imd-validate.cjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./schemas/*.json": "./schemas/*.json",
+    "./refusals": "./dist/refusals.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "schemas",
+    "vendor",
+    "scripts",
+    "bin",
+    "examples",
+    "sources",
+    "docs",
+    "site",
+    "test/*.test.cjs",
+    "README.md",
+    "LICENSE",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "build": "node vendor/typescript/lib/tsc.js -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.cjs",
+    "validate": "node bin/imd-validate.cjs",
+    "schemas": "node scripts/generate-schemas.mjs"
+  }
+}

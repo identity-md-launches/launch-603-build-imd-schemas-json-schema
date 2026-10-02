@@ -1,0 +1,13 @@
+{
+  "objective": "Research the three largest restaking protocols and their slashing conditions.",
+  "skill": "research-report",
+  "outputs": [
+    {
+      "name": "report",
+      "path": "artifacts/report.md",
+      "mediaType": "text/markdown"
+    }
+  ],
+  "minCitations": 8,
+  "github": false
+}

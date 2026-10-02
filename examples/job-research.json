@@ -1,0 +1,16 @@
+{
+  "objective": "Which L2s settle to Ethereum with a live fraud or validity proof today?",
+  "template": "research",
+  "rubric": {
+    "contains": [
+      "one row per L2",
+      "the proof system and whether it is live"
+    ],
+    "mayNotRestOn": [
+      "L2BEAT alone"
+    ]
+  },
+  "panelSize": 5,
+  "panelQuorum": 3,
+  "minCitations": 6
+}

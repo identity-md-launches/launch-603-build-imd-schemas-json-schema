@@ -1,0 +1,19 @@
+{
+  "objective": "Add a pause guardian to the vault and cover it with tests.",
+  "repoUrl": "https://github.com/OWNER/REPO",
+  "baseCommit": "0123456789abcdef0123456789abcdef01234567",
+  "shape": "chain",
+  "steps": [
+    {
+      "skill": "refine-project",
+      "paths": [
+        "src",
+        "test"
+      ]
+    },
+    {
+      "skill": "adversarial-review"
+    }
+  ],
+  "github": true
+}

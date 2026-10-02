@@ -1,0 +1,27 @@
+{
+  "objective": "Build an ERC-4626 vault with a mock token and meaningful tests. Do not deploy it.",
+  "shape": "chain",
+  "references": [
+    "defi-native",
+    "solidity-security-review"
+  ],
+  "steps": [
+    {
+      "skill": "build-contract-project"
+    },
+    {
+      "skill": "write-foundry-tests",
+      "paths": [
+        "test"
+      ],
+      "objective": "Add invariant tests for share accounting and rounding.",
+      "acceptanceCriteria": [
+        "totalAssets never falls below the sum of redeemable assets"
+      ]
+    },
+    {
+      "skill": "adversarial-review"
+    }
+  ],
+  "github": true
+}

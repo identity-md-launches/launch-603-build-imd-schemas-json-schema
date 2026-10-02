@@ -1,0 +1,22 @@
+{
+  "v": 1,
+  "question": "How much IMD was burned on Ethereum mainnet in the window?",
+  "chainId": 1,
+  "window": {
+    "fromBlock": 20800000,
+    "toBlock": 20814400
+  },
+  "answerType": "uint256",
+  "evidence": "chain",
+  "panelSize": 5,
+  "quorum": 5,
+  "toleranceBps": 0,
+  "validForSeconds": 3600,
+  "definitions": {
+    "burn": "Transfer events from any address to 0x0000000000000000000000000000000000000000 on 0xd34a99bc0f67ae1bbd63c660e6d0b0dd03e263b7."
+  },
+  "guards": {
+    "min": "0",
+    "max": "10000000000000000000000000"
+  }
+}

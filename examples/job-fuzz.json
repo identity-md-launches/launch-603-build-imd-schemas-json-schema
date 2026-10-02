@@ -1,0 +1,11 @@
+{
+  "objective": "Fuzz the vault's share accounting.",
+  "template": "fuzz",
+  "repoUrl": "https://github.com/OWNER/REPO",
+  "baseCommit": "0123456789abcdef0123456789abcdef01234567",
+  "contracts": [
+    "test/VaultInvariants.t.sol"
+  ],
+  "projectPath": ".",
+  "runs": 100000
+}

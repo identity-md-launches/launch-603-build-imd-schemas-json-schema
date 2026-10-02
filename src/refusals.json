@@ -1,0 +1,104 @@
+[
+  {
+    "code": "invalid_input",
+    "cause": "An action body breaks a documented type, required field, length, count, enum, format, dependency or exclusion. The server also uses this code for quote-time input rejection.",
+    "remedy": "Read the returned path and problems, correct the input, and validate again. Passing local checks does not guarantee server admission.",
+    "scope": "input"
+  },
+  {
+    "code": "invalid_payment_shape",
+    "cause": "The strict x402 payment object contains an unexpected key, a wrong field shape or a nonempty SDK extensions object. This is the payment envelope, not the action input.",
+    "remedy": "Use only the payment fields in the Paid requests table. Empty extensions is documented as allowed. Match accepted to the challenge and use the order resource URL and quote deadline.",
+    "scope": "payment"
+  },
+  {
+    "code": "missing_fact",
+    "cause": "The workflow request does not state the token total supply (missing fact: token_supply); \"fixed supply\" alone does not give a quantity.",
+    "remedy": "State the numeric total supply explicitly in request, such as \"a fixed total supply of 1,000,000,000 tokens with 18 decimals\". Keep context and draft consistent.",
+    "scope": "semantic"
+  },
+  {
+    "code": "unplannable_steps",
+    "cause": "The proposed steps cannot be planned. In this assignment, gas-and-size-report, write-readme-and-docs and deploy-script steps must not name paths.",
+    "remedy": "Remove paths entirely from those three skills. Other writing skills can require paths; check each skill rather than applying one rule to every step.",
+    "scope": "semantic"
+  },
+  {
+    "code": "protected_path",
+    "cause": "A write budget names protected foundry.toml or lib, including descendants; broad or traversing paths can also reach protected content.",
+    "remedy": "Choose narrow repository-relative writable paths outside foundry.toml and lib. Do not ask a step to rewrite protected project infrastructure.",
+    "scope": "input"
+  },
+  {
+    "code": "recheck_failed",
+    "cause": "The evaluator cannot reproduce or accept the proposed plan, including vague rules or asking adversarial-review to write a failing test.",
+    "remedy": "Replace vague rules with specific observable acceptance criteria. Put test creation in a writing/test skill; reserve adversarial-review for independent read-only review, then recheck.",
+    "scope": "semantic"
+  },
+  {
+    "code": "needs_revision",
+    "cause": "The evaluator needs a clearer or corrected request, including vague rules or asking a read-only adversarial-review step to produce a failing test.",
+    "remedy": "Specify measurable behavior and separate test-writing from review. Revise the request using the reported reasons, then recheck before payment.",
+    "scope": "semantic"
+  },
+  {
+    "code": "invalid_plan",
+    "cause": "The proposed plan is invalid; one known cause is request plus context plus draft objective exceeding about 7,000 characters after folding. Other planning failures can use the same code.",
+    "remedy": "Shorten the combined narrative, state concise facts once, and follow the server blocker details. The approximate folded threshold is separate from each schema string maximum.",
+    "scope": "semantic"
+  },
+  {
+    "code": "objective_too_large",
+    "cause": "The combined workflow request, context and draft objective exceeds the evaluator allowance, observed at about 7,000 characters after folding.",
+    "remedy": "Reduce the combined narrative below the approximate threshold and rerun the server check. JSON Schema field maxima alone do not model this evaluator rule.",
+    "scope": "semantic"
+  },
+  {
+    "code": "payer_not_owner",
+    "cause": "A job.continue payment is signed by a wallet other than the wallet that paid for the original project.",
+    "remedy": "Use the parent project paidBy wallet. A valid parentJobId and a valid quote do not establish payer ownership.",
+    "scope": "payment"
+  },
+  {
+    "code": "request_key_conflict",
+    "cause": "A requestKey already identifies a quote with a different action or input.",
+    "remedy": "Reuse the same key only for an identical retry; use a new UUID when the action or input changes.",
+    "scope": "state"
+  },
+  {
+    "code": "launch_token",
+    "cause": "A project or hook launch asks for a different token than the fixed launch token terms. Project/hook launches use 1,000,000,000 tokens, 18 decimals and plain transfers.",
+    "remedy": "Use those terms for evm_project or univ4_hook, or request custom_token with explicit economics for your own token terms. Supply the token name and symbol.",
+    "scope": "semantic"
+  },
+  {
+    "code": "too_many_publishes",
+    "cause": "The server publication quota has been reached. This depends on service state and publication history.",
+    "remedy": "Honor Retry-After when supplied and retry later; local body validation cannot determine remaining publication quota.",
+    "scope": "state"
+  },
+  {
+    "code": "no_panel",
+    "cause": "The requested job has no research panel at GET /jobs/:id/panel. This read-route error does not mean the paid input schema is wrong.",
+    "remedy": "Check the job id and whether it is a research-panel job; use the appropriate result route for other job kinds.",
+    "scope": "state"
+  },
+  {
+    "code": "unknown_schedule",
+    "cause": "The schedule id does not identify an available schedule. A syntactically valid UUID does not prove a schedule exists.",
+    "remedy": "Check the id with the schedule read route and use the actual schedule id before topping up.",
+    "scope": "state"
+  },
+  {
+    "code": "invalid_owner",
+    "cause": "The owner filter on GET /schedules is not a valid 0x-prefixed wallet address. This is a read query parameter, not a paid schedule input field.",
+    "remedy": "Use a 0x-prefixed 40-hex-character wallet address in the owner query; do not add owner to schedule.create or schedule.topup input.",
+    "scope": "input"
+  },
+  {
+    "code": "evaluation_unavailable",
+    "cause": "An evaluator or required evaluation provider is temporarily unavailable; this is a transient service failure.",
+    "remedy": "Retry the unchanged request with backoff and honor Retry-After when present. Inspect the existing order before retrying a payment; do not invent a new payment because evaluation was unavailable.",
+    "scope": "transient"
+  }
+]

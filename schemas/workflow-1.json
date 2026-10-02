@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imd-schemas.local/schemas/workflow-1.json",
+  "title": "IMD workflow-1",
+  "description": "workflow.open input, from Workflow body and its strict Job body draft.",
+  "type": "object",
+  "properties": {
+    "request": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16000
+    },
+    "context": {
+      "type": "string",
+      "maxLength": 16000,
+      "default": ""
+    },
+    "draft": {
+      "allOf": [
+        {
+          "$ref": "launch-1.json"
+        },
+        {
+          "type": "object",
+          "required": [
+            "shape",
+            "steps",
+            "onchain",
+            "ipfs"
+          ],
+          "properties": {
+            "shape": {
+              "enum": [
+                "chain",
+                "dag"
+              ]
+            },
+            "onchain": {
+              "enum": [
+                "evm_project",
+                "univ4_hook"
+              ]
+            },
+            "ipfs": {
+              "$ref": "common-1.json#/$defs/hostedIpfs"
+            },
+            "steps": {
+              "type": "array",
+              "allOf": [
+                {
+                  "contains": {
+                    "type": "object",
+                    "properties": {
+                      "skill": {
+                        "enum": [
+                          "frontend-for-contract",
+                          "build-website"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "skill"
+                    ]
+                  },
+                  "minContains": 1,
+                  "maxContains": 1
+                },
+                {
+                  "contains": {
+                    "type": "object",
+                    "properties": {
+                      "skill": {
+                        "const": "adversarial-review"
+                      }
+                    },
+                    "required": [
+                      "skill"
+                    ]
+                  },
+                  "minContains": 1
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "permissions": {
+      "type": "object",
+      "properties": {
+        "github": {
+          "type": "boolean"
+        },
+        "ipfs": {
+          "$ref": "common-1.json#/$defs/ipfs"
+        },
+        "onchain": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "evm_project",
+                "univ4_hook"
+              ]
+            },
+            "chainId": {
+              "$ref": "common-1.json#/$defs/launchChain"
+            }
+          },
+          "required": [
+            "kind",
+            "chainId"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "onchain"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "request",
+    "draft",
+    "permissions"
+  ],
+  "additionalProperties": false,
+  "$comment": "The library checks matching launch kinds, DAG reachability, the 16 KiB serialized quote-envelope size when available and approximately 7000 folded objective characters. Total token supply and plan feasibility are evaluator judgments; see the refusal catalog."
+}

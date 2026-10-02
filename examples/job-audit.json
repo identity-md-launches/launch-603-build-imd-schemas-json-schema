@@ -1,0 +1,6 @@
+{
+  "objective": "Audit the staking vault and its reward accounting in this repository.",
+  "template": "audit",
+  "repoUrl": "https://github.com/owner/repo.git",
+  "baseCommit": "0123456789abcdef0123456789abcdef01234567"
+}

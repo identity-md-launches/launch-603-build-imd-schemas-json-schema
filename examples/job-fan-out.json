@@ -1,0 +1,25 @@
+{
+  "objective": "Build a token dashboard with a price chart and a holders table.",
+  "shape": "fan_out_join",
+  "steps": [
+    {
+      "skill": "implement-component",
+      "objective": "The price chart.",
+      "paths": [
+        "src/chart"
+      ]
+    },
+    {
+      "skill": "implement-component",
+      "objective": "The holders table.",
+      "paths": [
+        "src/holders"
+      ]
+    },
+    {
+      "skill": "integrate-project",
+      "objective": "Wire both into one page and build the export."
+    }
+  ],
+  "ipfs": "token-dashboard"
+}

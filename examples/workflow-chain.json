@@ -1,0 +1,33 @@
+{
+  "request": "Build an ERC-20 token called Tip Vault (symbol TIPV) with a fixed total supply of 1,000,000,000 tokens with 18 decimals minted to the deployer, a full Foundry test suite and an independent review; deploy it; then publish a small website that shows the token, its supply and a connected wallet's balance.",
+  "context": "Sepolia only. GitHub publication and IPFS hosting are approved. Keep the supply fixed; no owner mint.",
+  "draft": {
+    "objective": "Build the TIPV ERC-20 with tests and an independent review, deploy it, then build the website against the live deployment.",
+    "shape": "chain",
+    "onchain": "evm_project",
+    "github": true,
+    "ipfs": true,
+    "contracts": [
+      "TipVault"
+    ],
+    "steps": [
+      {
+        "skill": "build-contract-project"
+      },
+      {
+        "skill": "frontend-for-contract"
+      },
+      {
+        "skill": "adversarial-review"
+      }
+    ]
+  },
+  "permissions": {
+    "github": true,
+    "ipfs": true,
+    "onchain": {
+      "kind": "evm_project",
+      "chainId": 11155111
+    }
+  }
+}

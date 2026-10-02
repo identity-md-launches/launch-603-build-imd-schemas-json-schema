@@ -1,0 +1,63 @@
+{
+  "request": "Release Tip Jar (TIPS): an ERC-20 with a fixed total supply of 1,000,000,000 tokens and 18 decimals and a TipJar contract that forwards ETH tips to a recipient, with invariant tests and an independent review; deploy both on Sepolia; then publish a one-page site to tip and read totals.",
+  "context": "Sepolia only. GitHub and IPFS approved. Site name tip-jar. No owner, no admin, no upgrade.",
+  "draft": {
+    "objective": "Build TIPS and TipJar with tests and a review, deploy them, then build the tipping page against the live deployment.",
+    "shape": "dag",
+    "onchain": "evm_project",
+    "github": true,
+    "ipfs": "tip-jar",
+    "contracts": [
+      "TipsToken",
+      "TipJar"
+    ],
+    "references": [
+      "solidity-security-review"
+    ],
+    "steps": [
+      {
+        "skill": "build-contract-project",
+        "key": "contracts",
+        "dependsOn": [],
+        "objective": "TipsToken and TipJar with a Foundry project.",
+        "acceptanceCriteria": [
+          "TipJar never holds ETH after a tip"
+        ]
+      },
+      {
+        "skill": "write-foundry-tests",
+        "key": "tests",
+        "dependsOn": [
+          "contracts"
+        ],
+        "paths": [
+          "test"
+        ],
+        "objective": "Invariant and fuzz tests for TipJar."
+      },
+      {
+        "skill": "adversarial-review",
+        "key": "review",
+        "dependsOn": [
+          "tests"
+        ]
+      },
+      {
+        "skill": "frontend-for-contract",
+        "key": "site",
+        "dependsOn": [
+          "review"
+        ],
+        "objective": "Connect a wallet, tip in ETH, show the recipient's total."
+      }
+    ]
+  },
+  "permissions": {
+    "github": true,
+    "ipfs": "tip-jar",
+    "onchain": {
+      "kind": "evm_project",
+      "chainId": 11155111
+    }
+  }
+}

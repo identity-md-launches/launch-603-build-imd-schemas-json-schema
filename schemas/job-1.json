@@ -1,0 +1,381 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imd-schemas.local/schemas/job-1.json",
+  "title": "IMD job-1",
+  "description": "Inputs for job.open and job.continue. Select $defs/open or $defs/continue when the action is known.",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/open"
+    },
+    {
+      "$ref": "#/$defs/continue"
+    }
+  ],
+  "$defs": {
+    "body": {
+      "type": "object",
+      "properties": {
+        "objective": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8000
+        },
+        "skill": {
+          "$ref": "common-1.json#/$defs/skill"
+        },
+        "template": {
+          "enum": [
+            "single",
+            "impl_tests",
+            "impl_tests_review",
+            "multi_contract",
+            "fuzz",
+            "research",
+            "audit"
+          ]
+        },
+        "shape": {
+          "enum": [
+            "chain",
+            "fan_out_join",
+            "dag"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "common-1.json#/$defs/step"
+          },
+          "minItems": 1,
+          "maxItems": 6
+        },
+        "references": {
+          "$ref": "common-1.json#/$defs/references"
+        },
+        "repoUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "format": "uri"
+        },
+        "baseCommit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "contracts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "anyOf": [
+              {
+                "pattern": "^[^/\\\\.\\u0000]+$"
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "common-1.json#/$defs/relativePath"
+                  },
+                  {
+                    "pattern": "[.]sol$"
+                  }
+                ]
+              }
+            ],
+            "$comment": "Contract names (without path separators or filename extensions), or repository-relative .sol paths; source existence is a remote check."
+          },
+          "maxItems": 4
+        },
+        "paths": {
+          "$ref": "common-1.json#/$defs/paths"
+        },
+        "inputs": {
+          "$ref": "common-1.json#/$defs/inputs"
+        },
+        "outputs": {
+          "$ref": "common-1.json#/$defs/outputs"
+        },
+        "github": {
+          "type": "boolean"
+        },
+        "ipfs": {
+          "$ref": "common-1.json#/$defs/ipfs"
+        },
+        "onchain": {
+          "$ref": "common-1.json#/$defs/onchain"
+        },
+        "chainId": {
+          "$ref": "common-1.json#/$defs/launchChain"
+        },
+        "pairWith": {
+          "enum": [
+            "eth",
+            "imd"
+          ]
+        },
+        "economics": {
+          "$ref": "common-1.json#/$defs/economics"
+        },
+        "projectPath": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "runs": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 10000000
+        },
+        "rubric": {
+          "type": "object",
+          "properties": {
+            "contains": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 500
+              },
+              "minItems": 1,
+              "maxItems": 8
+            },
+            "mayNotRestOn": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "maxItems": 8,
+              "default": []
+            }
+          },
+          "required": [
+            "contains"
+          ],
+          "additionalProperties": false
+        },
+        "panelSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        "panelQuorum": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        "minCitations": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "parentJobId": {
+          "$ref": "common-1.json#/$defs/uuid"
+        }
+      },
+      "required": [
+        "objective"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "repoUrl": [
+          "baseCommit"
+        ],
+        "baseCommit": [
+          "repoUrl"
+        ],
+        "steps": [
+          "shape"
+        ]
+      },
+      "allOf": [
+        {
+          "not": {
+            "required": [
+              "skill",
+              "steps"
+            ]
+          }
+        },
+        {
+          "not": {
+            "required": [
+              "skill",
+              "template"
+            ]
+          }
+        },
+        {
+          "not": {
+            "required": [
+              "steps",
+              "template"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "shape": {
+                "const": "dag"
+              }
+            },
+            "required": [
+              "shape"
+            ]
+          },
+          "then": {
+            "required": [
+              "steps"
+            ],
+            "properties": {
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "key",
+                    "dependsOn"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "template": {
+                "const": "research"
+              }
+            },
+            "required": [
+              "template"
+            ]
+          },
+          "then": {
+            "properties": {
+              "objective": {
+                "type": "string",
+                "maxLength": 4000
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "template": {
+                "const": "fuzz"
+              }
+            },
+            "required": [
+              "template"
+            ]
+          },
+          "then": {
+            "required": [
+              "contracts"
+            ],
+            "properties": {
+              "contracts": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "template": {
+                "const": "audit"
+              }
+            },
+            "required": [
+              "template"
+            ]
+          },
+          "then": {
+            "required": [
+              "repoUrl",
+              "baseCommit"
+            ],
+            "properties": {
+              "ipfs": false,
+              "onchain": false
+            }
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "required": [
+                  "projectPath"
+                ]
+              },
+              {
+                "required": [
+                  "runs"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "template"
+            ],
+            "properties": {
+              "template": {
+                "const": "fuzz"
+              }
+            }
+          }
+        }
+      ],
+      "$comment": "Canonical fields only. The legacy deliver/host/hostLabel/launch/launchKind aliases lack a full field-table contract and are intentionally unsupported. DAG graph validity, quota availability and semantic feasibility require additional checks."
+    },
+    "open": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/body"
+        },
+        {
+          "properties": {
+            "parentJobId": false,
+            "onchain": false,
+            "chainId": false,
+            "pairWith": false,
+            "economics": false
+          }
+        }
+      ]
+    },
+    "continue": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/body"
+        },
+        {
+          "type": "object",
+          "required": [
+            "parentJobId"
+          ],
+          "properties": {
+            "repoUrl": false,
+            "baseCommit": false,
+            "onchain": false,
+            "chainId": false,
+            "pairWith": false,
+            "economics": false
+          }
+        }
+      ],
+      "$comment": "Parent readiness, newest project head and payer ownership need live server data. No input validation can establish payer_not_owner."
+    }
+  }
+}

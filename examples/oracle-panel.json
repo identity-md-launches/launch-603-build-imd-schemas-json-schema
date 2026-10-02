@@ -1,0 +1,28 @@
+{
+  "v": 1,
+  "question": "Did openai/openai-python publish a non-prerelease GitHub release on September 21, 2026 UTC?",
+  "chainId": 1,
+  "window": {
+    "hours": 48
+  },
+  "answerType": "bool",
+  "evidence": "panel",
+  "panelSize": 5,
+  "quorum": 4,
+  "validForSeconds": 86400,
+  "definitions": {
+    "project": "Use https://github.com/openai/openai-python/releases and release published_at timestamps. Exclude drafts and prereleases.",
+    "calendar": "Use [2026-09-21T00:00:00Z, 2026-09-22T00:00:00Z). Blockchain blocks are context only.",
+    "missing": "Unavailable historical evidence is not false. Report inability rather than guessing."
+  },
+  "guards": {
+    "sources": [
+      "https://github.com/openai/openai-python/"
+    ],
+    "minSources": 1
+  },
+  "consumer": {
+    "chainId": 1,
+    "verifyingContract": "0x1111111111111111111111111111111111111111"
+  }
+}

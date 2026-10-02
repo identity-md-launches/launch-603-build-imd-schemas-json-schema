@@ -1,0 +1,54 @@
+{
+  "readAt": "2026-10-02",
+  "source": "https://api.imd.fun/openapi.json",
+  "actions": [
+    {
+      "action": "job.open",
+      "version": "job-1",
+      "limits": {}
+    },
+    {
+      "action": "job.continue",
+      "version": "job-1",
+      "limits": {}
+    },
+    {
+      "action": "launch.open",
+      "version": "launch-1",
+      "limits": {}
+    },
+    {
+      "action": "oracle.request",
+      "version": "oracle-1",
+      "limits": {
+        "minPanelSize": 5,
+        "maxPanelSize": 100
+      }
+    },
+    {
+      "action": "workflow.open",
+      "version": "workflow-1",
+      "limits": {}
+    },
+    {
+      "action": "schedule.create",
+      "version": "schedule-1",
+      "limits": {
+        "minRuns": 1,
+        "maxRuns": 1000000,
+        "minOracleIntervalMinutes": 10,
+        "minJobIntervalMinutes": 30
+      }
+    },
+    {
+      "action": "schedule.topup",
+      "version": "topup-1",
+      "limits": {
+        "minRuns": 1,
+        "maxRuns": 1000000,
+        "minOracleIntervalMinutes": 10,
+        "minJobIntervalMinutes": 30
+      }
+    }
+  ]
+}

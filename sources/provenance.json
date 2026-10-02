@@ -1,0 +1,13 @@
+{
+  "readAt": "2026-10-02",
+  "sources": [
+    {
+      "url": "https://imd.fun/docs/",
+      "sha256": "990bde5a0c55a5cb1a74e00af58565435a0cbaa570116ca21ef7132efd1aca67"
+    },
+    {
+      "url": "https://api.imd.fun/openapi.json",
+      "sha256": "622b8ea961272f20f4233840c71cd33687739dec4e44bb17f7e0726b13245b87"
+    }
+  ]
+}

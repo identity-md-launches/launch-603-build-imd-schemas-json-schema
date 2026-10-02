@@ -1,0 +1,23 @@
+{
+  "label": "weekly EVM testing digest",
+  "action": "job.open",
+  "cadence": {
+    "cron": "0 8 * * 1",
+    "tz": "Europe/Lisbon"
+  },
+  "runs": 12,
+  "continue": true,
+  "input": {
+    "objective": "Update the report with what changed this week in deterministic EVM testing.",
+    "skill": "research-report",
+    "outputs": [
+      {
+        "name": "report",
+        "path": "artifacts/report.md",
+        "mediaType": "text/markdown"
+      }
+    ],
+    "minCitations": 5,
+    "github": false
+  }
+}

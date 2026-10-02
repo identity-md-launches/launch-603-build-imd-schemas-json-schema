@@ -1,0 +1,432 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imd-schemas.local/schemas/common-1.json",
+  "title": "Shared IMD input definitions",
+  "description": "Shared definitions for the 2026-10-02 documentation snapshot; not a paid action.",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+    },
+    "skill": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "not": {
+        "enum": [
+          "defi-native",
+          "solidity-security-review",
+          "uniswap-v4-hooks",
+          "uniswap-v4-security",
+          "pashov-skill",
+          "pashov-xray",
+          "pashov-fizz",
+          "tob-entry-point-analyzer",
+          "tob-property-based-testing",
+          "better-interface",
+          "public-rpcs",
+          "evm-project-launch",
+          "custom-token-launch",
+          "audit-specialist",
+          "audit-judge"
+        ]
+      },
+      "$comment": "Skill availability is a live catalog check. Known reference-only and planner-only skills cannot be runnable steps."
+    },
+    "reference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "common-1.json#/$defs/reference"
+      },
+      "maxItems": 8
+    },
+    "stepKey": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,31}$"
+    },
+    "namedFile": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,63}$"
+    },
+    "hex64": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "address": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "bytes32": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "decimal": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "uint256": {
+      "type": "string",
+      "pattern": "^[0-9]+$",
+      "$comment": "The library also checks the numeric value is at most 2^256 - 1."
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.{1,2}(?:/|$))[^\\\\\\u0000]+$",
+      "$comment": "Repository-relative POSIX paths; the library separately reports protected_path for foundry.toml and lib."
+    },
+    "artifactPath": {
+      "allOf": [
+        {
+          "$ref": "common-1.json#/$defs/relativePath"
+        },
+        {
+          "type": "string",
+          "pattern": "^artifacts/.+"
+        }
+      ]
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "$ref": "common-1.json#/$defs/relativePath"
+      },
+      "maxItems": 16
+    },
+    "siteLabel": {
+      "type": "string",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]{0,30}[a-z0-9])?$"
+    },
+    "ipfs": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "common-1.json#/$defs/siteLabel"
+        }
+      ]
+    },
+    "hostedIpfs": {
+      "anyOf": [
+        {
+          "const": true
+        },
+        {
+          "$ref": "common-1.json#/$defs/siteLabel"
+        }
+      ]
+    },
+    "launchKind": {
+      "enum": [
+        "univ4_hook",
+        "evm_project",
+        "custom_token"
+      ]
+    },
+    "onchain": {
+      "anyOf": [
+        {
+          "const": true
+        },
+        {
+          "$ref": "common-1.json#/$defs/launchKind"
+        }
+      ]
+    },
+    "launchChain": {
+      "type": "integer",
+      "enum": [
+        11155111
+      ],
+      "$comment": "Pinned api.imd.fun capability at read date. Other deployments and changed capabilities require a reviewed schema update."
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "common-1.json#/$defs/namedFile"
+        },
+        "path": {
+          "$ref": "common-1.json#/$defs/relativePath"
+        },
+        "hash": {
+          "$ref": "common-1.json#/$defs/hex64"
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "submissionHash": {
+          "$ref": "common-1.json#/$defs/hex64"
+        }
+      },
+      "required": [
+        "name",
+        "path",
+        "hash",
+        "mediaType",
+        "bytes",
+        "submissionHash"
+      ],
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "common-1.json#/$defs/namedFile"
+        },
+        "path": {
+          "$ref": "common-1.json#/$defs/artifactPath"
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "name",
+        "path",
+        "mediaType"
+      ],
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "common-1.json#/$defs/input"
+      },
+      "maxItems": 32
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "common-1.json#/$defs/output"
+      },
+      "maxItems": 32
+    },
+    "variables": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 2000
+      }
+    },
+    "economics": {
+      "type": "object",
+      "properties": {
+        "poolBps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9000
+        },
+        "initialMarketCapWei": {
+          "$ref": "common-1.json#/$defs/decimal"
+        },
+        "remainderTo": {
+          "$ref": "common-1.json#/$defs/address"
+        }
+      },
+      "required": [
+        "poolBps"
+      ],
+      "additionalProperties": false
+    },
+    "step": {
+      "type": "object",
+      "properties": {
+        "skill": {
+          "$ref": "common-1.json#/$defs/skill"
+        },
+        "key": {
+          "$ref": "common-1.json#/$defs/stepKey"
+        },
+        "dependsOn": {
+          "type": "array",
+          "items": {
+            "$ref": "common-1.json#/$defs/stepKey"
+          },
+          "maxItems": 6
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 3000
+        },
+        "acceptanceCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "paths": {
+          "$ref": "common-1.json#/$defs/paths"
+        },
+        "references": {
+          "$ref": "common-1.json#/$defs/references"
+        },
+        "inputs": {
+          "$ref": "common-1.json#/$defs/inputs"
+        },
+        "outputs": {
+          "$ref": "common-1.json#/$defs/outputs"
+        },
+        "variables": {
+          "$ref": "common-1.json#/$defs/variables"
+        }
+      },
+      "required": [
+        "skill"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "skill": {
+                "enum": [
+                  "implement-contract",
+                  "implement-one-contract",
+                  "implement-and-test",
+                  "implement-component",
+                  "write-foundry-tests",
+                  "refine-project"
+                ]
+              }
+            },
+            "required": [
+              "skill"
+            ]
+          },
+          "then": {
+            "required": [
+              "paths"
+            ],
+            "properties": {
+              "paths": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "skill": {
+                "enum": [
+                  "gas-and-size-report",
+                  "write-readme-and-docs",
+                  "deploy-script"
+                ]
+              }
+            },
+            "required": [
+              "skill"
+            ]
+          },
+          "then": {
+            "properties": {
+              "paths": false
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "skill": {
+                "const": "implement-one-contract"
+              }
+            },
+            "required": [
+              "skill"
+            ]
+          },
+          "then": {
+            "required": [
+              "variables"
+            ],
+            "properties": {
+              "variables": {
+                "type": "object",
+                "required": [
+                  "contract"
+                ],
+                "properties": {
+                  "contract": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "$comment": "The commissioned task corrects the docs path table: gas-and-size-report, write-readme-and-docs and deploy-script must not name paths. DAG validity and protected paths are checked by the library."
+    },
+    "cadence": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "every": {
+              "type": "string",
+              "pattern": "^P(?:(?:[0-9]+(?:[.,][0-9]+)?W)|(?=.+)(?:[0-9]+(?:[.,][0-9]+)?D)?(?:T(?=.+)(?:[0-9]+(?:[.,][0-9]+)?H)?(?:[0-9]+(?:[.,][0-9]+)?M)?(?:[0-9]+(?:[.,][0-9]+)?S)?)?)$",
+              "$comment": "Fixed ISO 8601 weeks/days/time durations. The library rejects zero, enforces the per-action floor and fractions only on the final component. Calendar years/months are not supported by this experimental validator."
+            }
+          },
+          "required": [
+            "every"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cron": {
+              "type": "string",
+              "pattern": "^\\S+(?:[ \\t]+\\S+){4}$",
+              "$comment": "Five cron fields. The library checks syntax/ranges and minimum spacing."
+            },
+            "tz": {
+              "type": "string",
+              "minLength": 1,
+              "default": "UTC",
+              "$comment": "The library checks this against Node Intl IANA time-zone data."
+            }
+          },
+          "required": [
+            "cron"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

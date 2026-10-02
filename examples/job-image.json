@@ -1,0 +1,12 @@
+{
+  "objective": "Create a warm illustration of a bakery storefront for a website hero.",
+  "skill": "create-image",
+  "outputs": [
+    {
+      "name": "hero",
+      "path": "artifacts/hero.png",
+      "mediaType": "image/png"
+    }
+  ],
+  "github": false
+}

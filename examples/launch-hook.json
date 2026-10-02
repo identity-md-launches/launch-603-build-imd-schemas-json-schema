@@ -1,0 +1,17 @@
+{
+  "objective": "Build a Uniswap v4 hook that burns a share of every swap, with tests and an independent review.",
+  "shape": "chain",
+  "references": [
+    "uniswap-v4-hooks",
+    "uniswap-v4-security"
+  ],
+  "steps": [
+    {
+      "skill": "build-contract-project"
+    },
+    {
+      "skill": "adversarial-review"
+    }
+  ],
+  "onchain": "univ4_hook"
+}

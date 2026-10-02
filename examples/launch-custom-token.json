@@ -1,0 +1,19 @@
+{
+  "objective": "Build Example Token (EXM), a fixed total supply of 1,000,000,000 tokens with 18 decimals, tests and an independent review.",
+  "shape": "chain",
+  "steps": [
+    {
+      "skill": "build-contract-project"
+    },
+    {
+      "skill": "adversarial-review"
+    }
+  ],
+  "onchain": "custom_token",
+  "chainId": 11155111,
+  "pairWith": "eth",
+  "economics": {
+    "poolBps": 9000,
+    "initialMarketCapWei": "1000000000000000000"
+  }
+}

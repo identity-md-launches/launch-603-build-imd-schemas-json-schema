@@ -1,0 +1,73 @@
+{
+  "objective": "Implement a vesting contract, test it, review it and write its README.",
+  "shape": "dag",
+  "contracts": [
+    "src/Vesting.sol"
+  ],
+  "references": [
+    "solidity-security-review"
+  ],
+  "steps": [
+    {
+      "skill": "implement-one-contract",
+      "key": "impl",
+      "dependsOn": [],
+      "objective": "Linear vesting with a cliff.",
+      "acceptanceCriteria": [
+        "release() never pays more than vested"
+      ],
+      "paths": [
+        "src/Vesting.sol"
+      ],
+      "variables": {
+        "contract": "Vesting"
+      }
+    },
+    {
+      "skill": "write-foundry-tests",
+      "key": "tests",
+      "dependsOn": [
+        "impl"
+      ],
+      "paths": [
+        "test/Vesting.t.sol"
+      ]
+    },
+    {
+      "skill": "adversarial-review",
+      "key": "review",
+      "dependsOn": [
+        "impl"
+      ],
+      "references": [
+        "pashov-skill"
+      ]
+    },
+    {
+      "skill": "write-readme-and-docs",
+      "key": "docs",
+      "dependsOn": [
+        "tests",
+        "review"
+      ],
+      "inputs": [
+        {
+          "name": "spec",
+          "path": "artifacts/spec.md",
+          "mediaType": "text/markdown",
+          "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bytes": 4210,
+          "submissionHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audit-notes",
+          "path": "artifacts/audit-notes.md",
+          "mediaType": "text/markdown"
+        }
+      ]
+    }
+  ],
+  "github": true
+}

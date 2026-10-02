@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imd-schemas.local/schemas/schedule-1.json",
+  "title": "IMD schedule-1",
+  "description": "schedule.create input, with an action-specific frozen body.",
+  "type": "object",
+  "properties": {
+    "action": {
+      "enum": [
+        "oracle.request",
+        "job.open"
+      ]
+    },
+    "input": {},
+    "cadence": {
+      "$ref": "common-1.json#/$defs/cadence"
+    },
+    "runs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "continue": {
+      "type": "boolean"
+    },
+    "startAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "action",
+    "input",
+    "cadence",
+    "runs"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "job.open"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "$ref": "job-1.json#/$defs/open"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "oracle.request"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "$ref": "oracle-1.json"
+          },
+          "continue": false
+        }
+      }
+    }
+  ],
+  "$comment": "Cadence floors are at least 10 minutes for oracle.request and 30 minutes for job.open. The library checks fixed durations and cron schedules; live admission still checks the frozen input each run. Owner, submissionKey and expiresAt are not accepted paid input fields."
+}

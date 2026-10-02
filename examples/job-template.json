@@ -1,0 +1,7 @@
+{
+  "objective": "Implement and test a timelock savings contract.",
+  "template": "impl_tests_review",
+  "contracts": [
+    "src/TimelockSavings.sol"
+  ]
+}

@@ -1,0 +1,159 @@
+[
+  {
+    "file": "job-report.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#paid",
+    "notes": "Quote envelope removed; this file is its input only."
+  },
+  {
+    "file": "job-audit.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#job-body"
+  },
+  {
+    "file": "job-continue.json",
+    "action": "job.continue",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#continue",
+    "notes": "PARENT_JOB_ID replaced by an illustrative UUID, not a live owned project."
+  },
+  {
+    "file": "job-image.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-chain.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-fan-out.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-dag.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-source.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-artifact-report.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-artifact-site.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "launch-hook.json",
+    "action": "launch.open",
+    "version": "launch-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-template.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-fuzz.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "job-research.json",
+    "action": "job.open",
+    "version": "job-1",
+    "source": "https://imd.fun/docs#compose"
+  },
+  {
+    "file": "workflow-chain.json",
+    "action": "workflow.open",
+    "version": "workflow-1",
+    "source": "https://imd.fun/docs#workflow-body",
+    "notes": "Quote envelope removed and numeric total supply added to the request to address missing_fact token_supply."
+  },
+  {
+    "file": "workflow-dag.json",
+    "action": "workflow.open",
+    "version": "workflow-1",
+    "source": "https://imd.fun/docs#workflow-body",
+    "notes": "Numeric total supply added to the request to address missing_fact token_supply."
+  },
+  {
+    "file": "oracle-panel.json",
+    "action": "oracle.request",
+    "version": "oracle-1",
+    "source": "https://imd.fun/docs#oracle-body"
+  },
+  {
+    "file": "oracle-burn.json",
+    "action": "oracle.request",
+    "version": "oracle-1",
+    "source": "https://imd.fun/docs#oracle-body"
+  },
+  {
+    "file": "oracle-ranking.json",
+    "action": "oracle.request",
+    "version": "oracle-1",
+    "source": "https://imd.fun/docs#oracle-body"
+  },
+  {
+    "file": "oracle-count.json",
+    "action": "oracle.request",
+    "version": "oracle-1",
+    "source": "https://imd.fun/docs#oracle-body"
+  },
+  {
+    "file": "oracle-spot.json",
+    "action": "oracle.request",
+    "version": "oracle-1",
+    "source": "https://imd.fun/docs#oracle-body",
+    "notes": "Illustrative request: choose a real pool id before sending the spot-price question."
+  },
+  {
+    "file": "schedule-oracle.json",
+    "action": "schedule.create",
+    "version": "schedule-1",
+    "source": "https://imd.fun/docs#schedule-body"
+  },
+  {
+    "file": "schedule-job.json",
+    "action": "schedule.create",
+    "version": "schedule-1",
+    "source": "https://imd.fun/docs#schedule-body"
+  },
+  {
+    "file": "schedule-topup.json",
+    "action": "schedule.topup",
+    "version": "topup-1",
+    "source": "https://imd.fun/docs#schedule-body",
+    "notes": "SCHEDULE_ID replaced by an illustrative UUID, not a live schedule."
+  },
+  {
+    "file": "launch-custom-token.json",
+    "action": "launch.open",
+    "version": "launch-1",
+    "source": "https://imd.fun/docs#job-body",
+    "notes": "Additional example derived from the custom_token and economics rows; not an upstream example."
+  }
+]

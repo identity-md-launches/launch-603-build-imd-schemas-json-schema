@@ -1,0 +1,14 @@
+{
+  "v": 1,
+  "question": "How many ERC-8004 agents were registered on Ethereum mainnet in the window?",
+  "chainId": 1,
+  "window": {
+    "hours": 24
+  },
+  "answerType": "uint256",
+  "evidence": "chain",
+  "panelSize": 5,
+  "quorum": 5,
+  "toleranceBps": 0,
+  "validForSeconds": 3600
+}

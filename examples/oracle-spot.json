@@ -1,0 +1,17 @@
+{
+  "v": 1,
+  "question": "What was the median spot price of Uniswap v4 pool POOL_ID across the window, in currency0 per 1e18 currency1?",
+  "chainId": 56,
+  "window": {
+    "hours": 6
+  },
+  "answerType": "uint256",
+  "evidence": "chain",
+  "panelSize": 10,
+  "quorum": 8,
+  "toleranceBps": 0,
+  "validForSeconds": 3600,
+  "definitions": {
+    "samples": "Read the price at 11 blocks spread evenly across the window and take the median."
+  }
+}

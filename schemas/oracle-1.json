@@ -1,0 +1,365 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imd-schemas.local/schemas/oracle-1.json",
+  "title": "IMD oracle-1",
+  "description": "Full oracle.request paid input; the shorter requests/check input is a different API.",
+  "type": "object",
+  "properties": {
+    "v": {
+      "const": 1
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "chainId": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "window": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "hours": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 720
+            }
+          },
+          "required": [
+            "hours"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "fromBlock": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "toBlock": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "fromBlock",
+            "toBlock"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "answerType": {
+      "enum": [
+        "bool",
+        "address",
+        "bytes32",
+        "uint256",
+        "address[]",
+        "bytes32[]"
+      ]
+    },
+    "panelSize": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 100
+    },
+    "quorum": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 100
+    },
+    "validForSeconds": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 2592000
+    },
+    "evidence": {
+      "enum": [
+        "chain",
+        "panel"
+      ],
+      "default": "chain"
+    },
+    "head": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32
+    },
+    "definitions": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 64
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    },
+    "guards": {
+      "type": "object",
+      "properties": {
+        "allow": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "common-1.json#/$defs/address"
+              },
+              {
+                "$ref": "common-1.json#/$defs/bytes32"
+              }
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 256
+        },
+        "deny": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "common-1.json#/$defs/address"
+              },
+              {
+                "$ref": "common-1.json#/$defs/bytes32"
+              }
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 1024
+        },
+        "mustHaveCode": {
+          "type": "boolean"
+        },
+        "min": {
+          "$ref": "common-1.json#/$defs/uint256"
+        },
+        "max": {
+          "$ref": "common-1.json#/$defs/uint256"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "format": "uri"
+          },
+          "minItems": 1,
+          "maxItems": 32
+        },
+        "minSources": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        }
+      },
+      "additionalProperties": false
+    },
+    "toleranceBps": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+    },
+    "consumer": {
+      "type": "object",
+      "properties": {
+        "chainId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "verifyingContract": {
+          "$ref": "common-1.json#/$defs/address"
+        }
+      },
+      "required": [
+        "chainId",
+        "verifyingContract"
+      ],
+      "additionalProperties": false
+    },
+    "allowAmbiguous": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "v",
+    "question",
+    "chainId",
+    "window",
+    "answerType",
+    "panelSize",
+    "quorum",
+    "validForSeconds"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "head"
+        ]
+      },
+      "then": {
+        "properties": {
+          "answerType": {
+            "enum": [
+              "address[]",
+              "bytes32[]"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "toleranceBps"
+        ]
+      },
+      "then": {
+        "properties": {
+          "answerType": {
+            "const": "uint256"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerType": {
+            "enum": [
+              "address",
+              "address[]"
+            ]
+          }
+        },
+        "required": [
+          "answerType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "guards": {
+            "type": "object",
+            "properties": {
+              "allow": {
+                "type": "array",
+                "items": {
+                  "$ref": "common-1.json#/$defs/address"
+                }
+              },
+              "deny": {
+                "type": "array",
+                "items": {
+                  "$ref": "common-1.json#/$defs/address"
+                }
+              },
+              "min": false,
+              "max": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerType": {
+            "enum": [
+              "bytes32",
+              "bytes32[]"
+            ]
+          }
+        },
+        "required": [
+          "answerType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "guards": {
+            "type": "object",
+            "properties": {
+              "allow": {
+                "type": "array",
+                "items": {
+                  "$ref": "common-1.json#/$defs/bytes32"
+                }
+              },
+              "deny": {
+                "type": "array",
+                "items": {
+                  "$ref": "common-1.json#/$defs/bytes32"
+                }
+              },
+              "min": false,
+              "max": false,
+              "mustHaveCode": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerType": {
+            "const": "uint256"
+          }
+        },
+        "required": [
+          "answerType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "guards": {
+            "type": "object",
+            "properties": {
+              "allow": false,
+              "deny": false,
+              "mustHaveCode": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerType": {
+            "const": "bool"
+          }
+        },
+        "required": [
+          "answerType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "guards": {
+            "type": "object",
+            "properties": {
+              "allow": false,
+              "deny": false,
+              "mustHaveCode": false,
+              "min": false,
+              "max": false
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$comment": "The library checks quorum <= panelSize, fromBlock <= toBlock and uint256 min/max ordering/range. Configured RPC availability, evidence feasibility and capable panel seats require the server."
+}

@@ -1,0 +1,15 @@
+{
+  "objective": "Build a one-page explainer from the attached report.",
+  "skill": "build-website",
+  "inputs": [
+    {
+      "name": "report",
+      "path": "artifacts/report.md",
+      "mediaType": "text/markdown",
+      "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "bytes": 18234,
+      "submissionHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "ipfs": "restaking-explainer"
+}

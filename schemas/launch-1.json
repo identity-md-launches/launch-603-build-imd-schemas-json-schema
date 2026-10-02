@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imd-schemas.local/schemas/launch-1.json",
+  "title": "IMD launch-1",
+  "description": "launch.open input, derived from the Job body and launch economics.",
+  "allOf": [
+    {
+      "$ref": "job-1.json#/$defs/body"
+    },
+    {
+      "type": "object",
+      "required": [
+        "onchain"
+      ],
+      "properties": {
+        "parentJobId": false
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "onchain": {
+            "const": "custom_token"
+          }
+        },
+        "required": [
+          "onchain"
+        ]
+      },
+      "then": {
+        "required": [
+          "economics"
+        ],
+        "properties": {
+          "economics": {
+            "type": "object",
+            "required": [
+              "initialMarketCapWei"
+            ],
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "poolBps": {
+                      "const": 9000
+                    }
+                  },
+                  "required": [
+                    "poolBps"
+                  ]
+                },
+                "then": {},
+                "else": {
+                  "required": [
+                    "remainderTo"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "onchain": {
+            "enum": [
+              true,
+              "evm_project",
+              "univ4_hook"
+            ]
+          }
+        },
+        "required": [
+          "onchain"
+        ]
+      },
+      "then": {
+        "properties": {
+          "economics": {
+            "type": "object",
+            "properties": {
+              "initialMarketCapWei": false
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$comment": "Launch token terms, chain pairing support and live deployer capacity require remote checking. Custom-token remainderTo is required unless poolBps is exactly 9000."
+}
