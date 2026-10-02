@@ -19,14 +19,20 @@
     },
     {
         "code": "unplannable_steps",
-        "cause": "The proposed steps cannot be planned. In this assignment, gas-and-size-report, write-readme-and-docs and deploy-script steps must not name paths.",
-        "remedy": "Remove paths entirely from those three skills. Other writing skills can require paths; check each skill rather than applying one rule to every step.",
+        "cause": "The proposed steps cannot be planned. Explicit step keys or dependencies require shape:dag. In this assignment, gas-and-size-report, write-readme-and-docs and deploy-script steps must not name paths.",
+        "remedy": "Use shape:dag for explicit keys and dependencies, and remove paths entirely from those three skills. Other writing skills can require paths.",
         "scope": "semantic"
     },
     {
         "code": "protected_path",
-        "cause": "A write budget names protected foundry.toml or lib, including descendants; broad or traversing paths can also reach protected content.",
-        "remedy": "Choose narrow repository-relative writable paths outside foundry.toml and lib. Do not ask a step to rewrite protected project infrastructure.",
+        "cause": "A write budget names protected .git, foundry.toml or lib, including descendants; broad or traversing paths can also reach protected content.",
+        "remedy": "Choose narrow repository-relative writable paths outside .git, foundry.toml and lib. Do not ask a step to rewrite protected project infrastructure.",
+        "scope": "input"
+    },
+    {
+        "code": "bad_path_count",
+        "cause": "A task has more than 16 allowed paths after each extensionless directory path expands to the path and path/**. Files and explicit /** globs count once.",
+        "remedy": "Reduce or narrow the path list to at most 16 paths after directory expansion.",
         "scope": "input"
     },
     {

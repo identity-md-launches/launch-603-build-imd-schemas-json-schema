@@ -5,14 +5,17 @@ export function jobChecks(body: Record<string, any>, prefix: string, errors: Iss
   const steps = Array.isArray(body.steps) ? body.steps : [];
   for (const [location, paths] of [['/paths',body.paths],...steps.map((step: any, i: number) => [`/steps/${i}/paths`,step?.paths])] as [string,unknown][]) {
     if (!Array.isArray(paths)) continue;
+    const expandedCount = paths.reduce((count: number, path: unknown) => count + (typeof path === 'string' && !path.endsWith('/**') && !/(?:^|\/)[^/.][^/]*\.[^/.]+$/.test(path) ? 2 : 1), 0);
+    if (expandedCount > 16) fail(location,'expected between 1 and 16 allowed paths after directory expansion','bad_path_count');
     paths.forEach((path: unknown, index: number) => {
       if (typeof path !== 'string') return;
       const normalized = path.replace(/\\/g,'/').replace(/^(\.\/)+/,'').replace(/\/+$/,'');
-      if (normalized === 'foundry.toml' || normalized === 'lib' || normalized.startsWith('lib/')) fail(`${location}/${index}`,`protected path: ${path}; foundry.toml and lib are reserved`,'protected_path');
+      if (normalized === '.git' || normalized.startsWith('.git/') || normalized === 'foundry.toml' || normalized === 'lib' || normalized.startsWith('lib/')) fail(`${location}/${index}`,`protected path: ${path}; .git, foundry.toml and lib are reserved`,'protected_path');
     });
   }
   steps.forEach((step: any, i: number) => {
     if (!obj(step)) return;
+    if (body.shape !== 'dag') for (const field of ['key','dependsOn']) if (Object.hasOwn(step,field)) fail(`/steps/${i}/${field}`,'Explicit keys and dependencies require shape:dag','unplannable_steps');
     if (['gas-and-size-report','write-readme-and-docs','deploy-script'].includes(step.skill) && Object.hasOwn(step,'paths')) fail(`/steps/${i}/paths`,`${step.skill} steps must not name paths`,'unplannable_steps');
     if (step.skill === 'implement-one-contract' && (typeof step.variables?.contract !== 'string' || !step.variables.contract.trim())) fail(`/steps/${i}/variables/contract`,'is required for implement-one-contract');
     if (Array.isArray(step.acceptanceCriteria) && step.acceptanceCriteria.some((text: unknown) => typeof text === 'string' && /^(works|secure|good|correct|safe|best practices)[.!]?$/i.test(text.trim()))) warnings.push({code:'recheck_failed',path:prefix+`/steps/${i}/acceptanceCriteria`,message:'vague rules may cause recheck_failed or needs_revision; name observable behavior and evidence'});

@@ -107,6 +107,7 @@ function semantic(action: string, body: Record<string, any>, prefix: string, err
   const fail = (path: string, message: string, code = 'invalid_input') => errors.push({code,path: prefix + path,message});
   const warn = (path: string, message: string, code: string) => warnings.push({code,path: prefix + path,message});
   if (['job.open','job.continue','launch.open'].includes(action)) jobChecks(body, prefix, errors, warnings);
+  if (action === 'launch.open' && ['evm_project','univ4_hook'].includes(body.onchain) && typeof body.objective === 'string' && launchTokenMismatch(body.objective)) warn('/objective','launch_token: project and hook launches use 1,000,000,000 tokens, 18 decimals and plain transfers; check the requested token terms with the server','launch_token');
   if (action === 'oracle.request') {
     for (const field of ['min','max']) {
       const value = body.guards?.[field];
@@ -164,4 +165,16 @@ function hasNumericSupply(request: string): boolean {
     || /\b(?:mint(?:ed)?|issue(?:d)?)\s+\d/i.test(text)
     || /(?<![\w-])\d[\d,._]*(?:\s+(?:billion|million|thousand))?\s+tokens?\b/i.test(text)
     || /(?<![\w-])\d[\d,._]*(?:\s+(?:billion|million|thousand))?\s+[A-Z]{2,10}\b/.test(text);
+}
+
+function launchTokenMismatch(objective: string): boolean {
+  const supply = /\b(?:total\s+|fixed\s+)?supply\s*(?:of|is|:|=)?\s*(\d[\d,._]*)(?:\s*(billion|million|thousand))?\b/i.exec(objective);
+  if (supply) {
+    const quantity = Number(supply[1].replace(/[,_]/g,'')) * ({ billion: 1e9, million: 1e6, thousand: 1e3 }[supply[2]?.toLowerCase() as 'billion' | 'million' | 'thousand'] ?? 1);
+    if (Number.isFinite(quantity) && quantity !== 1e9) return true;
+  }
+  const decimals = /\b(\d+)\s+decimals?\b|\bdecimals?\s*(?::|=|of|is)?\s*(\d+)\b/i.exec(objective);
+  if (decimals && Number(decimals[1] ?? decimals[2]) !== 18) return true;
+  return /\b(?:transfer|transaction)\s+(?:fees?|tax(?:es)?)\b|\b(?:fees?|tax(?:es)?)\s+on\s+(?:every\s+)?transfers?\b/i.test(objective)
+    && !/\b(?:no|without)\s+(?:transfer|transaction)\s+(?:fees?|tax(?:es)?)\b/i.test(objective);
 }

@@ -82,8 +82,8 @@
     "relativePath": {
       "type": "string",
       "minLength": 1,
-      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.{1,2}(?:/|$))[^\\\\\\u0000]+$",
-      "$comment": "Repository-relative POSIX paths; the library separately reports protected_path for foundry.toml and lib."
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\\\u0000]+$",
+      "$comment": "Repository-relative POSIX paths, including . and ./ prefixes; the library separately reports protected_path for .git, foundry.toml and lib."
     },
     "artifactPath": {
       "allOf": [
