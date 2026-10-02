@@ -29,7 +29,7 @@ check('oracle cron cannot fire every minute', 'schedule.create', () => ({ action
 check('job cron cannot fire every ten minutes', 'schedule.create', () => ({ action: 'job.open', input: { objective: 'Research the subject.', skill: 'research-report' }, cadence: { cron: '*/10 * * * *' }, runs: 1 }), () => {}, /30|minimum|interval|closer/i);
 check('cron rejects out-of-range minute', 'schedule.create', () => ({ action: 'oracle.request', input: oracle(), cadence: { cron: '60 * * * *' }, runs: 1 }), () => {}, /cron|minute|range/i);
 check('timezone must be IANA', 'schedule.create', () => ({ action: 'oracle.request', input: oracle(), cadence: { cron: '0 9 * * *', tz: 'Made/Up' }, runs: 1 }), () => {}, /zone|IANA/i);
-for (const path of ['foundry.toml', './foundry.toml', 'lib', 'lib/example.sol', './lib/example.sol']) {
+for (const path of ['.github', '.github/workflows', '.github/workflows/ci.yml', '.git', '.git/', '.git/config', './.git/hooks/pre-commit', '././.git/config', 'foundry.toml', './foundry.toml', 'lib', 'lib/example.sol', './lib/example.sol']) {
   check(`protected job path ${path}`, 'job.open', () => ({ objective: 'Build a project.', paths: [path] }), () => {}, /protected path/i, 'protected_path');
   check(`protected step path ${path}`, 'job.open', () => ({ objective: 'Build a project.', shape: 'chain', steps: [{ skill: 'refine-project', paths: [path] }] }), () => {}, /protected path/i, 'protected_path');
 }

@@ -107,7 +107,7 @@ function semantic(action: string, body: Record<string, any>, prefix: string, err
   const fail = (path: string, message: string, code = 'invalid_input') => errors.push({code,path: prefix + path,message});
   const warn = (path: string, message: string, code: string) => warnings.push({code,path: prefix + path,message});
   if (['job.open','job.continue','launch.open'].includes(action)) jobChecks(body, prefix, errors, warnings);
-  if (action === 'launch.open' && ['evm_project','univ4_hook'].includes(body.onchain) && typeof body.objective === 'string' && launchTokenMismatch(body.objective)) warn('/objective','launch_token: project and hook launches use 1,000,000,000 tokens, 18 decimals and plain transfers; check the requested token terms with the server','launch_token');
+  if (action === 'launch.open' && ['evm_project','univ4_hook'].includes(body.onchain) && typeof body.objective === 'string' && launchTokenMismatch(body.objective)) fail('/objective','launch_token: project and hook launches use 1,000,000,000 tokens, 18 decimals and plain transfers; check the requested token terms with the server','launch_token');
   if (action === 'oracle.request') {
     for (const field of ['min','max']) {
       const value = body.guards?.[field];

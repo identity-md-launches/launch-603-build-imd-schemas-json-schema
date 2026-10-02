@@ -1,0 +1,1078 @@
+{
+  "endpoint": "https://api.imd.fun/requests/check",
+  "observedAt": "2026-10-02T23:44:48.511Z",
+  "cases": [
+    {
+      "name": "step_dot_git_config",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                "./.git/config"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [
+          {
+            "title": "Implement a scoped component against agreed interfaces while other contributors build independent components",
+            "short": "implement-component",
+            "skill": "implement-component",
+            "stage": 0
+          }
+        ],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_github",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                ".github"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "protected_path",
+            "detail": "\".github\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_github_workflows",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                ".github/workflows"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "protected_path",
+            "detail": "\".github/workflows\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          },
+          {
+            "code": "protected_path",
+            "detail": "\".github/workflows/**\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_github_ci",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                ".github/workflows/ci.yml"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "protected_path",
+            "detail": "\".github/workflows/ci.yml\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_vscode",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                ".vscode"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [
+          {
+            "title": "Implement a scoped component against agreed interfaces while other contributors build independent components",
+            "short": "implement-component",
+            "skill": "implement-component",
+            "stage": 0
+          }
+        ],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_git_slash",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                ".git/"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "protected_path",
+            "detail": "\".git/\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_git_config",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                ".git/config"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "protected_path",
+            "detail": "\".git/config\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          },
+          {
+            "code": "protected_path",
+            "detail": "\".git/config/**\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_dot",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                "."
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [
+          {
+            "title": "Implement a scoped component against agreed interfaces while other contributors build independent components",
+            "short": "implement-component",
+            "skill": "implement-component",
+            "stage": 0
+          }
+        ],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_dot_src",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                "./src"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [
+          {
+            "title": "Implement a scoped component against agreed interfaces while other contributors build independent components",
+            "short": "implement-component",
+            "skill": "implement-component",
+            "stage": 0
+          }
+        ],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "git_hook",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                ".git/hooks/pre-commit"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "protected_path",
+            "detail": "\".git/hooks/pre-commit\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          },
+          {
+            "code": "protected_path",
+            "detail": "\".git/hooks/pre-commit/**\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    },
+    {
+      "name": "launch_supply",
+      "request": {
+        "action": "launch.open",
+        "input": {
+          "onchain": "evm_project",
+          "objective": "Launch Example Token (EXM) with a fixed supply of 2,000,000,000 tokens and 18 decimals."
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "launch.open",
+        "kind": "contracts",
+        "plan": [],
+        "facts": [
+          {
+            "id": "what",
+            "label": "What each contract does",
+            "state": "unknown",
+            "required": false
+          },
+          {
+            "id": "access",
+            "label": "Who can call what",
+            "state": "missing",
+            "required": false,
+            "assumed": "Assumed: an owner who can change settings, and anyone for everything else."
+          },
+          {
+            "id": "numbers",
+            "label": "The numbers that matter",
+            "state": "unknown",
+            "required": false,
+            "assumed": "The builders will choose them and write them in the README."
+          },
+          {
+            "id": "upgrades",
+            "label": "Upgrades and pausing",
+            "state": "missing",
+            "required": false,
+            "assumed": "Assumed: not upgradeable and not pausable."
+          },
+          {
+            "id": "dependencies",
+            "label": "Outside contracts",
+            "state": "unknown",
+            "required": false,
+            "assumed": "Assumed: none beyond standard libraries."
+          },
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "stated",
+            "required": true
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "stated",
+            "required": true
+          },
+          {
+            "id": "token_supply",
+            "label": "Supply: 1,000,000,000 with 18 decimals, minted once",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_rules",
+            "label": "Transfers: plain, with no fees, limits, pausing or minting",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_split",
+            "label": "Split: 10% to the swarm, the other 90% is yours: 80% into the pool unless you choose otherwise, the rest to your wallet",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_pool",
+            "label": "Pool: paired with ETH, opening at a 20 ETH market cap",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_trading_fee",
+            "label": "Trading fee: 1.25% of every trade: 1% to you, 0.25% to IMD, claimable any time",
+            "state": "fixed",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "bad_path_count",
+            "detail": "expected between 1 and 16 allowed paths",
+            "node": "impl"
+          },
+          {
+            "code": "bad_path_count",
+            "detail": "expected between 1 and 16 allowed paths",
+            "node": "tests"
+          },
+          {
+            "code": "launch_token",
+            "detail": "Every launch deploys the same token: 1,000,000,000 with 18 decimals, minted once, transfers plain, with no fees, limits, pausing or minting, split 10% to the swarm, the other 90% is yours: 80% into the pool unless you choose otherwise, the rest to your wallet. This request asks for a different supply or decimals, which the launch would not deploy. Take it out and check again."
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "missing_fact",
+            "fact": "access",
+            "detail": "Not said: who can call what. Assumed: an owner who can change settings, and anyone for everything else."
+          },
+          {
+            "code": "missing_fact",
+            "fact": "upgrades",
+            "detail": "Not said: upgrades and pausing. Assumed: not upgradeable and not pausable."
+          }
+        ]
+      }
+    },
+    {
+      "name": "launch_decimals",
+      "request": {
+        "action": "launch.open",
+        "input": {
+          "onchain": "univ4_hook",
+          "objective": "Launch Example Token (EXM) with a fixed supply of 1,000,000,000 tokens and 6 decimals."
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "launch.open",
+        "kind": "hook",
+        "plan": [],
+        "facts": [
+          {
+            "id": "callbacks",
+            "label": "When the hook acts",
+            "state": "unknown",
+            "required": false
+          },
+          {
+            "id": "fee_rule",
+            "label": "The fee rule",
+            "state": "unknown",
+            "required": false,
+            "assumed": "Assumed: the pool's own fee, unchanged by the hook."
+          },
+          {
+            "id": "fee_destination",
+            "label": "Where fees go",
+            "state": "unknown",
+            "required": false,
+            "assumed": "Assumed: fees stay with liquidity providers."
+          },
+          {
+            "id": "admin",
+            "label": "Who can change it",
+            "state": "unknown",
+            "required": false,
+            "assumed": "Assumed: nobody can change it after deployment."
+          },
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "stated",
+            "required": true
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "stated",
+            "required": true
+          },
+          {
+            "id": "pools",
+            "label": "Which pool: the one this launch opens for its new token, with the hook attached",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_supply",
+            "label": "Supply: 1,000,000,000 with 18 decimals, minted once",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_rules",
+            "label": "Transfers: plain, with no fees, limits, pausing or minting",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_split",
+            "label": "Split: 10% to the swarm, the other 90% is yours: 80% into the pool unless you choose otherwise, the rest to your wallet",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_pool",
+            "label": "Pool: paired with ETH, opening at a 20 ETH market cap",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "pool_fee",
+            "label": "Pool fee: 0.3% to liquidity providers (0.05% or 1% if you ask). It cannot be zero; \"no fees\" means the hook takes none of its own",
+            "state": "fixed",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "bad_path_count",
+            "detail": "expected between 1 and 16 allowed paths",
+            "node": "impl"
+          },
+          {
+            "code": "bad_path_count",
+            "detail": "expected between 1 and 16 allowed paths",
+            "node": "tests"
+          },
+          {
+            "code": "launch_token",
+            "detail": "Every launch deploys the same token: 1,000,000,000 with 18 decimals, minted once, transfers plain, with no fees, limits, pausing or minting, split 10% to the swarm, the other 90% is yours: 80% into the pool unless you choose otherwise, the rest to your wallet. This request asks for a different supply or decimals, which the launch would not deploy. Take it out and check again."
+          }
+        ],
+        "suggestions": []
+      }
+    },
+    {
+      "name": "launch_tax",
+      "request": {
+        "action": "launch.open",
+        "input": {
+          "onchain": "evm_project",
+          "objective": "Launch Example Token (EXM) with a fixed supply of 1,000,000,000 tokens, 18 decimals and a 2% transfer tax."
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "launch.open",
+        "kind": "contracts",
+        "plan": [],
+        "facts": [
+          {
+            "id": "what",
+            "label": "What each contract does",
+            "state": "unknown",
+            "required": false
+          },
+          {
+            "id": "access",
+            "label": "Who can call what",
+            "state": "missing",
+            "required": false,
+            "assumed": "Assumed: an owner who can change settings, and anyone for everything else."
+          },
+          {
+            "id": "numbers",
+            "label": "The numbers that matter",
+            "state": "stated",
+            "required": false,
+            "assumed": "The builders will choose them and write them in the README."
+          },
+          {
+            "id": "upgrades",
+            "label": "Upgrades and pausing",
+            "state": "missing",
+            "required": false,
+            "assumed": "Assumed: not upgradeable and not pausable."
+          },
+          {
+            "id": "dependencies",
+            "label": "Outside contracts",
+            "state": "missing",
+            "required": false,
+            "assumed": "Assumed: none beyond standard libraries."
+          },
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "stated",
+            "required": true
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "stated",
+            "required": true
+          },
+          {
+            "id": "token_supply",
+            "label": "Supply: 1,000,000,000 with 18 decimals, minted once",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_rules",
+            "label": "Transfers: plain, with no fees, limits, pausing or minting",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_split",
+            "label": "Split: 10% to the swarm, the other 90% is yours: 80% into the pool unless you choose otherwise, the rest to your wallet",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_pool",
+            "label": "Pool: paired with ETH, opening at a 20 ETH market cap",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_trading_fee",
+            "label": "Trading fee: 1.25% of every trade: 1% to you, 0.25% to IMD, claimable any time",
+            "state": "fixed",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "bad_path_count",
+            "detail": "expected between 1 and 16 allowed paths",
+            "node": "impl"
+          },
+          {
+            "code": "bad_path_count",
+            "detail": "expected between 1 and 16 allowed paths",
+            "node": "tests"
+          },
+          {
+            "code": "launch_token",
+            "detail": "Every launch deploys the same token: 1,000,000,000 with 18 decimals, minted once, transfers plain, with no fees, limits, pausing or minting, split 10% to the swarm, the other 90% is yours: 80% into the pool unless you choose otherwise, the rest to your wallet. This request asks for rules on transfers, which the launch would not deploy. Take it out and check again."
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "missing_fact",
+            "fact": "access",
+            "detail": "Not said: who can call what. Assumed: an owner who can change settings, and anyone for everything else."
+          },
+          {
+            "code": "missing_fact",
+            "fact": "upgrades",
+            "detail": "Not said: upgrades and pausing. Assumed: not upgradeable and not pausable."
+          },
+          {
+            "code": "missing_fact",
+            "fact": "dependencies",
+            "detail": "Not said: outside contracts. Assumed: none beyond standard libraries."
+          }
+        ]
+      }
+    },
+    {
+      "name": "launch_standard",
+      "request": {
+        "action": "launch.open",
+        "input": {
+          "onchain": "evm_project",
+          "objective": "Launch Example Token (EXM) with a fixed supply of 1,000,000,000 tokens, 18 decimals and plain transfers."
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "launch.open",
+        "kind": "contracts",
+        "plan": [],
+        "facts": [
+          {
+            "id": "what",
+            "label": "What each contract does",
+            "state": "unknown",
+            "required": false
+          },
+          {
+            "id": "access",
+            "label": "Who can call what",
+            "state": "missing",
+            "required": false,
+            "assumed": "Assumed: an owner who can change settings, and anyone for everything else."
+          },
+          {
+            "id": "numbers",
+            "label": "The numbers that matter",
+            "state": "unknown",
+            "required": false,
+            "assumed": "The builders will choose them and write them in the README."
+          },
+          {
+            "id": "upgrades",
+            "label": "Upgrades and pausing",
+            "state": "missing",
+            "required": false,
+            "assumed": "Assumed: not upgradeable and not pausable."
+          },
+          {
+            "id": "dependencies",
+            "label": "Outside contracts",
+            "state": "unknown",
+            "required": false,
+            "assumed": "Assumed: none beyond standard libraries."
+          },
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "stated",
+            "required": true
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "stated",
+            "required": true
+          },
+          {
+            "id": "token_supply",
+            "label": "Supply: 1,000,000,000 with 18 decimals, minted once",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_rules",
+            "label": "Transfers: plain, with no fees, limits, pausing or minting",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_split",
+            "label": "Split: 10% to the swarm, the other 90% is yours: 80% into the pool unless you choose otherwise, the rest to your wallet",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_pool",
+            "label": "Pool: paired with ETH, opening at a 20 ETH market cap",
+            "state": "fixed",
+            "required": false
+          },
+          {
+            "id": "token_trading_fee",
+            "label": "Trading fee: 1.25% of every trade: 1% to you, 0.25% to IMD, claimable any time",
+            "state": "fixed",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "bad_path_count",
+            "detail": "expected between 1 and 16 allowed paths",
+            "node": "impl"
+          },
+          {
+            "code": "bad_path_count",
+            "detail": "expected between 1 and 16 allowed paths",
+            "node": "tests"
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "missing_fact",
+            "fact": "access",
+            "detail": "Not said: who can call what. Assumed: an owner who can change settings, and anyone for everything else."
+          },
+          {
+            "code": "missing_fact",
+            "fact": "upgrades",
+            "detail": "Not said: upgrades and pausing. Assumed: not upgradeable and not pausable."
+          }
+        ]
+      }
+    },
+    {
+      "name": "step_git",
+      "request": {
+        "action": "job.open",
+        "input": {
+          "objective": "Implement a component.",
+          "shape": "chain",
+          "steps": [
+            {
+              "skill": "implement-component",
+              "paths": [
+                ".git"
+              ]
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "response": {
+        "action": "job.open",
+        "kind": "other",
+        "plan": [],
+        "facts": [
+          {
+            "id": "token_name",
+            "label": "Token name",
+            "state": "not_applicable",
+            "required": false
+          },
+          {
+            "id": "token_symbol",
+            "label": "Token symbol",
+            "state": "not_applicable",
+            "required": false
+          }
+        ],
+        "judged": true,
+        "blockers": [
+          {
+            "code": "protected_path",
+            "detail": "\".git\" is protected and can never be modified by a task",
+            "node": "implement_component"
+          }
+        ],
+        "suggestions": [
+          {
+            "code": "vague",
+            "detail": "Parts of this are open to interpretation. The builders will decide them; say what matters to you."
+          }
+        ]
+      }
+    }
+  ]
+}

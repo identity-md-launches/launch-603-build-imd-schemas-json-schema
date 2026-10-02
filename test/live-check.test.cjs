@@ -3,7 +3,8 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { validate } = require('..');
 const fixture = require('./live/check-2026-10-02.json');
-const byName = Object.fromEntries(fixture.cases.map(entry => [entry.name, entry]));
+const followup = require('./live/check-followup-2026-10-02.json');
+const byName = Object.fromEntries([...fixture.cases, ...followup.cases].map(entry => [entry.name, entry]));
 const local = name => validate(byName[name].request.action, byName[name].request.input);
 const liveHas = (name, code) => byName[name].response.blockers?.some(blocker => blocker.code === code);
 
@@ -46,13 +47,34 @@ test('live path budget: directories expand while files and /** globs count once'
   }
 });
 
-test('live launch terms: mismatched supply, decimals or transfer tax warn only', () => {
+test('live launch terms: mismatched supply, decimals or transfer tax are errors', () => {
   for (const name of ['launch_supply', 'launch_decimals', 'launch_tax']) {
     assert.ok(liveHas(name, 'launch_token'), name);
     const result = local(name);
-    assert.equal(result.valid, true, JSON.stringify(result.errors));
-    assert.ok(result.warnings.some(warning => warning.code === 'launch_token'), name);
+    assert.equal(result.valid, false, JSON.stringify(result.errors));
+    assert.ok(result.errors.some(error => error.code === 'launch_token'), name);
+    assert.equal(result.warnings.some(warning => warning.code === 'launch_token'), false, name);
   }
   assert.equal(liveHas('launch_standard', 'launch_token'), false);
+  assert.equal(local('launch_standard').valid, true);
+  assert.equal(local('launch_standard').errors.some(error => error.code === 'launch_token'), false);
   assert.equal(local('launch_standard').warnings.some(warning => warning.code === 'launch_token'), false);
+});
+
+test('live protected paths: GitHub and bare Git paths remain blocked', () => {
+  for (const name of ['step_github', 'step_github_workflows', 'step_github_ci', 'step_git_slash', 'step_git_config']) {
+    assert.equal(byName[name].status, 200, name);
+    assert.ok(liveHas(name, 'protected_path'), name);
+    const result = local(name);
+    assert.equal(result.valid, false, name);
+    assert.ok(result.errors.some(error => error.code === 'protected_path'), name);
+  }
+});
+
+test('live path exceptions: exactly ./.git/config, and .vscode pass', () => {
+  for (const name of ['step_dot_git_config', 'step_vscode']) {
+    assert.equal(byName[name].status, 200, name);
+    assert.deepEqual(byName[name].response.blockers, [], name);
+    assert.equal(local(name).valid, true, name);
+  }
 });

@@ -31,7 +31,7 @@ save('common-1', schema('common-1', 'Shared IMD input definitions', 'Shared defi
     bytes32: { type: 'string', pattern: '^0x[0-9a-fA-F]{64}$' },
     decimal: { type: 'string', pattern: '^[0-9]+$' },
     uint256: { type: 'string', pattern: '^[0-9]+$', $comment: 'The library also checks the numeric value is at most 2^256 - 1.' },
-    relativePath: { ...str(1), pattern: '^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.{1,2}(?:/|$))[^\\\\\\u0000]+$', $comment: 'Repository-relative POSIX paths; the library separately reports protected_path for foundry.toml and lib.' },
+    relativePath: { ...str(1), pattern: '^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\\\u0000]+$', $comment: 'Repository-relative POSIX paths, including . and ./ prefixes; the library separately reports protected_path for .git, .github, foundry.toml and lib.' },
     artifactPath: { allOf: [ref('relativePath'), { type: 'string', pattern: '^artifacts/.+' }] },
     paths: arr(ref('relativePath'), 16),
     siteLabel: { type: 'string', pattern: '^[a-z0-9](?:[a-z0-9-]{0,30}[a-z0-9])?$' },

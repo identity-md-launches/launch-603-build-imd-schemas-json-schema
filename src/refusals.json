@@ -25,8 +25,8 @@
   },
   {
     "code": "protected_path",
-    "cause": "A write budget names protected .git, foundry.toml or lib, including descendants; broad or traversing paths can also reach protected content.",
-    "remedy": "Choose narrow repository-relative writable paths outside .git, foundry.toml and lib. Do not ask a step to rewrite protected project infrastructure.",
+    "cause": "A write budget names protected .git, .github, foundry.toml or lib, including descendants; broad or traversing paths can also reach protected content.",
+    "remedy": "Choose narrow repository-relative writable paths outside .git, .github, foundry.toml and lib. Do not ask a step to rewrite protected project infrastructure.",
     "scope": "input"
   },
   {

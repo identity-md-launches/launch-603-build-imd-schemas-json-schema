@@ -141,7 +141,7 @@ function semantic(action, body, prefix, errors, warnings) {
     if (['job.open', 'job.continue', 'launch.open'].includes(action))
         (0, job_1.jobChecks)(body, prefix, errors, warnings);
     if (action === 'launch.open' && ['evm_project', 'univ4_hook'].includes(body.onchain) && typeof body.objective === 'string' && launchTokenMismatch(body.objective))
-        warn('/objective', 'launch_token: project and hook launches use 1,000,000,000 tokens, 18 decimals and plain transfers; check the requested token terms with the server', 'launch_token');
+        fail('/objective', 'launch_token: project and hook launches use 1,000,000,000 tokens, 18 decimals and plain transfers; check the requested token terms with the server', 'launch_token');
     if (action === 'oracle.request') {
         for (const field of ['min', 'max']) {
             const value = body.guards?.[field];
